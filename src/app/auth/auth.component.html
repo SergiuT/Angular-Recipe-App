@@ -1,0 +1,35 @@
+<ng-template appPlaceholder></ng-template>
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
+<!--    <div class="alert alert-danger" *ngIf="error">-->
+<!--      <p>{{error}}</p>-->
+<!--    </div>-->
+<!--    <app-alert (close)="onHandleError()" [message]="error" *ngIf="error"></app-alert>-->
+    <div *ngIf="isLoading" style="text-align: center; margin-top: 200px">
+      <app-loading></app-loading>
+    </div>
+    <form #auth='ngForm' (ngSubmit)="onSubmit(auth)" *ngIf="!isLoading">
+      <p class="title" >{{ isLoggedIn ? 'Login' : 'Sign up' }}</p>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" ngModel name="email" required email>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          ngModel
+          name="password"
+          required
+          minlength="6"
+        >
+      </div>
+      <div>
+        <button class="btn btn-success" [disabled]="!auth.valid" type="submit" style="margin-right: 10px">{{ isLoggedIn ? 'Login' : 'Sign Up' }}</button>
+        <button class="btn btn-primary" type="button" (click)="onSwitch()">Switch to {{ isLoggedIn ? 'Sign Up' : 'Login' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
